@@ -1,0 +1,21 @@
+text=auto
+
+# source
+*.h     diff=c -text
+*.hpp   diff=cpp -text
+*.cpp   diff=cpp -text
+*.inl   diff=inl -text
+
+# libs
+*.dll   binary
+*.dylib binary
+*.so    binary
+*.lib   binary
+*.lai   binary
+*.la    binary
+*.a     binary
+
+# images
+*.png binary
+*.jpg binary
+*.gif binary
