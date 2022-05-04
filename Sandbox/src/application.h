@@ -1,7 +1,9 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include <vector>
 #include "time_manager.h"
+#include "game_object.h"
 #include <SFML/Graphics.hpp>
 
 class Application
@@ -10,7 +12,9 @@ public:
 	Application() : mWindow(nullptr), 
 		maxFPS(0), 
 		fpsLimitEnabled(false),
-		backgroundColor(sf::Color::Black) {}
+		backgroundColor(sf::Color::Black) {
+		initialize();
+	}
 	~Application();
 	
 	/// <summary>
@@ -74,6 +78,7 @@ public:
 	void setBackgroundColor(float red, float green, float blue, float alpha);
 
 private:
+	void initialize();
 	void processInput();
 	void draw();
 	void processWindowEvents();
@@ -92,6 +97,7 @@ private:
 	bool fixedUpdateEnabled;
 	float msForFixedUpdate;
 	sf::Color backgroundColor;
+	std::vector<GameObject*> allEntities;
 
 };
 

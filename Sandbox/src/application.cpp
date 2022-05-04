@@ -1,4 +1,5 @@
 #include "application.h"
+#include "component.h"
 #include <iostream>
 
 Application::~Application()
@@ -82,13 +83,27 @@ void Application::processWindowEvents()
 
 void Application::fixedUpdate()
 {
+	for (auto item : allEntities)
+	{
+		if (item->is_active && item->tick_enabled()) item->on_fixed_update(elapsedTime);
+	}
+}
+
+void Application::initialize()
+{
+	auto test = new GameObject("sono un test");
+	test->add_component(new Component("compnente test"));
+	allEntities.push_back(test);
 }
 
 void Application::processInput(){}
 
 void Application::update()
 {
-	// TODO: update game componentes
+	for (GameObject* item : allEntities)
+	{
+		if (item->is_active && item->tick_enabled()) item->on_update(elapsedTime);
+	}
 }
 
 void Application::draw()
