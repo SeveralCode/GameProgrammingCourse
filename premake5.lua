@@ -34,4 +34,4 @@ workspace "Game Programming Course"
             "sfml-audio.lib"
         }
 
-    postbuildcommands "COPY %{wks.location}/ThirdParty/libs/*.dll %{wks.location}/bin/%{cfg.buildcfg}-%{cfg.architecture}"
+    postbuildcommands "{COPY} %{wks.location}/ThirdParty/libs/*.dll %{wks.location}/bin/%{cfg.buildcfg}-%{cfg.architecture}"
