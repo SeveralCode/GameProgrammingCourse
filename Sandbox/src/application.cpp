@@ -109,6 +109,5 @@ void Application::update()
 void Application::draw()
 {
 	mWindow->clear(backgroundColor);
-
 	mWindow->display();
 }
