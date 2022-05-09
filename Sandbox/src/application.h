@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "time_manager.h"
-#include "game_object.h"
+#include "Classes/game_object.h"
 #include <SFML/Graphics.hpp>
 
 class Application

@@ -1,6 +1,13 @@
 #include "application.h"
 #include "component.h"
+#include "drawable.h"
 #include <iostream>
+#include <SFML/Graphics.hpp>
+
+#include <Components/renderer2D.h>
+
+#include <Classes/sprite.h>
+#include "Classes/area2d.h"
 
 Application::~Application()
 {
@@ -91,9 +98,16 @@ void Application::fixedUpdate()
 
 void Application::initialize()
 {
-	auto test = new GameObject("sono un test");
-	test->add_component(new Component("compnente test"));
-	allEntities.push_back(test);
+	const auto background = new Sprite();
+	background->renderer->set_texture_source("res/textures/background.png", true, true);
+	background->rect_transform->set_scale(1920, 1080);
+	allEntities.push_back(background);
+
+	const auto player = new Sprite();
+	player->renderer->set_texture_source("res/textures/player.png", true, false);
+	player->rect_transform->set_scale(64, 64);
+	player->rect_transform->set_position(960 - 32, 540 - 32);
+	allEntities.push_back(player);
 }
 
 void Application::processInput(){}
@@ -109,5 +123,16 @@ void Application::update()
 void Application::draw()
 {
 	mWindow->clear(backgroundColor);
+	
+	for each (auto item in allEntities)
+	{
+		const auto renders = item->get_components<RectTransform>();
+
+		for each(auto rend in renders)
+		{
+			mWindow->draw(*rend->get_transform());
+		}
+	}
+
 	mWindow->display();
 }

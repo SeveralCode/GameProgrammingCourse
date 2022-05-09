@@ -21,6 +21,11 @@ workspace "Game Programming Course"
         cppdialect "C++17"
         location "%{wks.location}/Sandbox"
 
+        --includes all files in source folder
+        includedirs {"%{wks.location}/Sandbox/src"}
+
+        postbuildcommands "{COPY} %{wks.location}/ThirdParty/libs/*.dll %{wks.location}/bin/%{cfg.buildcfg}-%{cfg.architecture}"
+
         files {
             "%{prj.location}/src/**.h",
             "%{prj.location}/src/**.cpp"

@@ -3,6 +3,8 @@
 
 #include <string>
 #include <vector>
+
+#include "component.h"
 #include "object.h"
 #include "tickable.h"
 
@@ -17,7 +19,7 @@ class GameObject : public Object, public ITickable
 public:
 	GameObject(const std::string name, const bool is_active = true);
 	GameObject(const std::string name, const std::vector<Component*> components, const bool is_active = true);
-	~GameObject();
+	virtual ~GameObject() = default;
 
 	/// <summary>
 	/// add a components to this game object
@@ -30,19 +32,22 @@ public:
 	/// </summary>
 	/// <param name="component">the components to remove</param>
 	void remove_component(Component* component);
-/*
+
 	/// <summary>
 	/// Get the first components of the given type from the attached components
 	/// </summary>
 	/// <typeparam name="T">the component to add</typeparam>
 	/// <returns></returns>
-	template<class T> const T* get_component()const {
+	template<class T, class = Component> const T* get_component()const {
 
-		if (components.size == 0) return nullptr;
+		if (components.size() == 0) return nullptr;
 
-		for (T* item : components)
+		for ( Component* item : components)
 		{
-			return item;
+			const auto val = dynamic_cast<T*>(item);
+			if (!val) continue;;
+
+			return val;
 		}
 
 		return nullptr;
@@ -57,15 +62,18 @@ public:
 	{
 		std::vector<T*> result;
 		
-		if (components.size() == 0) return;
+		if (components.size() == 0) return result;
 
-		for (T* item : components)
+		for each(Component* component in this->components)
 		{
-			result.emplace_back(item);
+			const auto val = dynamic_cast<T*>(component);
+			if (!val) continue;
+
+			result.push_back(val);
 		}
 
 		return result;
-	}*/
+	}
 
 protected:
 	// Inherited via ITickable

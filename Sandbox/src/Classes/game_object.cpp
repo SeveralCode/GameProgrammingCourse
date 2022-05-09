@@ -15,12 +15,9 @@ GameObject::GameObject(const std::string name, const std::vector<Component*> com
 	this->is_active = is_active;
 }
 
-GameObject::~GameObject()
-{
-}
-
 void GameObject::add_component(Component* component)
 {
+	component->owner = this;
 	components.push_back(component);
 }
 
