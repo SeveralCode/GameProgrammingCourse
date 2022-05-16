@@ -6,9 +6,9 @@
 
 #include <Components/renderer2D.h>
 
-#include <Classes/sprite.h>
 #include "Classes/area2d.h"
-#include "Components/controller.h"
+#include "Classes/character.h"
+#include "Components/movement_component.h"
 
 Application::~Application()
 {
@@ -99,23 +99,29 @@ void Application::fixedUpdate()
 
 void Application::initialize()
 {
-
-	const auto background = new Sprite();
+	auto background = new gfl::Sprite();
 	background->renderer->set_texture_source("res/textures/background.png", true, true);
 	background->rect_transform->set_scale(1920, 1080);
 	allEntities.push_back(background);
 
-	const auto player = new Sprite();
+	/*const auto player = new Sprite();
 	player->renderer->set_texture_source("res/textures/player.png", true, false);
 	player->rect_transform->set_scale(64, 64);
 	player->rect_transform->set_position(960 - 32, 540 - 32);
 	player->add_component(new Controller());
+	player->add_component(new MovementComponent());
+	allEntities.push_back(player);*/
+
+	const auto player = new gfl::Character();
+	player->renderer->set_texture_source("res/textures/player.png", true, false);
+	player->rect_transform->set_scale(64, 64);
+	player->rect_transform->set_position(960 - 32, 540 - 32);
 	allEntities.push_back(player);
 }
 
 void Application::processInput()
 {
-		for each (auto actor in allEntities)
+		/*for each (auto actor in allEntities)
 		{
 			auto controllers = actor->get_components<Controller>();
 
@@ -156,7 +162,7 @@ void Application::processInput()
 				controller->on_input(inputs);
 
 			}
-		}
+		}*/
 }
 
 void Application::update()

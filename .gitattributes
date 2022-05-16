@@ -21,4 +21,8 @@ text=auto
 *.gif binary
 
 # Project folder
-**/res
+**/res/** filter=lfs binary
+docs/** filter=lfs binary
+
+# Doxygen
+docgen filter=lfs binary eol=lf

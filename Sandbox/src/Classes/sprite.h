@@ -4,13 +4,16 @@
 #include <Classes/area2d.h>
 #include <Components/renderer2D.h>
 
-class Sprite : public Area2D
-{
-public:
-	Sprite();
-	~Sprite() override;
+namespace gfl {
 
-	Renderer2D* renderer;
-};
+	class Sprite : public Area2D
+	{
+	public:
+		Sprite();
+		~Sprite() override;
+
+		Renderer2D* renderer;
+	};
+}
 
 #endif

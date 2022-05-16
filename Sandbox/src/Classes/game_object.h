@@ -38,7 +38,7 @@ public:
 	/// </summary>
 	/// <typeparam name="T">the component to add</typeparam>
 	/// <returns></returns>
-	template<class T, class = Component> const T* get_component()const {
+	template<class T, class = Component>  T* get_component()const {
 
 		if (components.size() == 0) return nullptr;
 
